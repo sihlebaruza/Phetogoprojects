@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Status - Phetogo Projects</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f4f8; }
+    nav { background: #1a3c5e; padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    nav h1 { color: white; font-size: 18px; }
+    nav div a { color: #cce0f0; text-decoration: none; margin-left: 20px; font-size: 14px; padding: 6px 12px; border-radius: 4px; }
+    nav div a:hover { background: rgba(255,255,255,0.15); color: white; }
+    .container { max-width: 500px; margin: 40px auto; padding: 0 24px; }
+    .back { display: inline-block; margin-bottom: 16px; color: #1a3c5e; text-decoration: none; font-size: 13px; }
+    .card { background: white; padding: 32px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .card-header { border-bottom: 2px solid #f0f0f0; padding-bottom: 16px; margin-bottom: 24px; }
+    h2 { color: #1a3c5e; font-size: 20px; }
+    label { font-size: 13px; font-weight: bold; color: #444; display: block; margin-bottom: 6px; }
+    select { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; margin-bottom: 20px; }
+    select:focus { border-color: #1a3c5e; outline: none; }
+    .btn-row { display: flex; gap: 10px; }
+    button { padding: 10px 24px; background: #ffc107; color: #333; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; font-weight: bold; }
+    button:hover { background: #e0a800; }
+    .btn-cancel { padding: 10px 24px; background: #eee; color: #333; border-radius: 6px; font-size: 14px; text-decoration: none; }
+    .btn-cancel:hover { background: #ddd; }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>&#128203; Phetogo Projects — Task Manager</h1>
+    <div>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/add">Add Task</a>
+      <a href="/reports">Reports</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </nav>
+  <div class="container">
+    <a href="/dashboard" class="back">&#8592; Back to Dashboard</a>
+    <div class="card">
+      <div class="card-header">
+        <h2>Update Task #{{ task_id }} Status</h2>
+      </div>
+      <form method="POST">
+        <label>Select New Status</label>
+        <select name="status">
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
+        <div class="btn-row">
+          <button type="submit">Save Update</button>
+          <a href="/dashboard" class="btn-cancel">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

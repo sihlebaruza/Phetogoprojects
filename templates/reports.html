@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reports - Phetogo Projects</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f4f8; }
+    nav { background: #1a3c5e; padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    nav h1 { color: white; font-size: 18px; }
+    nav div a { color: #cce0f0; text-decoration: none; margin-left: 20px; font-size: 14px; padding: 6px 12px; border-radius: 4px; }
+    nav div a:hover { background: rgba(255,255,255,0.15); color: white; }
+    .container { max-width: 900px; margin: 40px auto; padding: 0 24px; }
+    .back { display: inline-block; margin-bottom: 16px; color: #1a3c5e; text-decoration: none; font-size: 13px; }
+    .page-header { margin-bottom: 24px; }
+    h2 { color: #1a3c5e; font-size: 22px; margin-bottom: 4px; }
+    .date { color: #888; font-size: 13px; }
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 30px; }
+    .stat { background: white; border-radius: 10px; padding: 24px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 4px solid #1a3c5e; }
+    .stat .number { font-size: 42px; font-weight: bold; }
+    .stat .label { font-size: 13px; color: #666; margin-top: 6px; }
+    .total .number { color: #1a3c5e; }
+    .total { border-top-color: #1a3c5e; }
+    .completed .number { color: #28a745; }
+    .completed { border-top-color: #28a745; }
+    .progress .number { color: #007bff; }
+    .progress { border-top-color: #007bff; }
+    .pending .number { color: #e6ac00; }
+    .pending { border-top-color: #ffc107; }
+    .progress-section { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .progress-section h3 { color: #1a3c5e; margin-bottom: 16px; font-size: 16px; }
+    .bar-wrap { margin-bottom: 14px; }
+    .bar-label { display: flex; justify-content: space-between; font-size: 13px; color: #555; margin-bottom: 6px; }
+    .bar-bg { background: #eee; border-radius: 20px; height: 12px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 20px; transition: width 0.5s; }
+    .bar-completed { background: #28a745; }
+    .bar-progress { background: #007bff; }
+    .bar-pending { background: #ffc107; }
+    .footer { text-align: center; color: #aaa; font-size: 12px; margin-top: 30px; padding-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>&#128203; Phetogo Projects — Task Manager</h1>
+    <div>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/add">Add Task</a>
+      <a href="/reports">Reports</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </nav>
+  <div class="container">
+    <a href="/dashboard" class="back">&#8592; Back to Dashboard</a>
+    <div class="page-header">
+      <h2>Daily Task Report</h2>
+      <p class="date">Date: {{ data.date }} &nbsp;|&nbsp; Logged in as: {{ user }}</p>
+    </div>
+    <div class="cards">
+      <div class="stat total">
+        <div class="number">{{ data.total }}</div>
+        <div class="label">Total Tasks Today</div>
+      </div>
+      <div class="stat completed">
+        <div class="number">{{ data.completed }}</div>
+        <div class="label">Completed</div>
+      </div>
+      <div class="stat progress">
+        <div class="number">{{ data.in_progress }}</div>
+        <div class="label">In Progress</div>
+      </div>
+      <div class="stat pending">
+        <div class="number">{{ data.pending }}</div>
+        <div class="label">Pending</div>
+      </div>
+    </div>
+    <div class="progress-section">
+      <h3>Task Completion Breakdown</h3>
+      {% if data.total > 0 %}
+      <div class="bar-wrap">
+        <div class="bar-label"><span>Completed</span><span>{{ data.completed }} / {{ data.total }}</span></div>
+        <div class="bar-bg"><div class="bar-fill bar-completed" style="width: {{ (data.completed / data.total * 100)|int }}%"></div></div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label"><span>In Progress</span><span>{{ data.in_progress }} / {{ data.total }}</span></div>
+        <div class="bar-bg"><div class="bar-fill bar-progress" style="width: {{ (data.in_progress / data.total * 100)|int }}%"></div></div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label"><span>Pending</span><span>{{ data.pending }} / {{ data.total }}</span></div>
+        <div class="bar-bg"><div class="bar-fill bar-pending" style="width: {{ (data.pending / data.total * 100)|int }}%"></div></div>
+      </div>
+      {% else %}
+      <p style="color:#999; font-size:13px;">No tasks logged today yet.</p>
+      {% endif %}
+    </div>
+    <div class="footer">Phetogo Projects Task Management System &copy; 2026</div>
+  </div>
+</body>
+</html>

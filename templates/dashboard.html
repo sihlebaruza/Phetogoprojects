@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard - Phetogoprojects</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f4f8; }
+    nav { background: #1a3c5e; padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    nav h1 { color: white; font-size: 18px; letter-spacing: 0.5px; }
+    nav div a { color: #cce0f0; text-decoration: none; margin-left: 20px; font-size: 14px; padding: 6px 12px; border-radius: 4px; transition: background 0.2s; }
+    nav div a:hover { background: rgba(255,255,255,0.15); color: white; }
+    .container { max-width: 1100px; margin: 30px auto; padding: 0 24px; }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .welcome { color: #1a3c5e; font-size: 20px; font-weight: bold; }
+    .welcome span { color: #555; font-weight: normal; font-size: 14px; margin-left: 10px; }
+    .btn { display: inline-block; padding: 10px 20px; background: #1a3c5e; color: white; border-radius: 6px; text-decoration: none; font-size: 14px; transition: background 0.2s; }
+    .btn:hover { background: #16324f; }
+    .filters { background: white; padding: 16px 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 20px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .filters input { padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; width: 250px; }
+    .filters select { padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+    .filters button { padding: 8px 16px; background: #1a3c5e; color: white; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; }
+    .filters button:hover { background: #16324f; }
+    .filters a { padding: 8px 16px; background: #eee; color: #333; border-radius: 6px; font-size: 14px; text-decoration: none; }
+    .filters a:hover { background: #ddd; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+    .stat-card { background: white; border-radius: 10px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid #1a3c5e; }
+    .stat-card .num { font-size: 28px; font-weight: bold; color: #1a3c5e; }
+    .stat-card .lbl { font-size: 12px; color: #888; margin-top: 4px; }
+    .stat-card.completed { border-left-color: #28a745; }
+    .stat-card.completed .num { color: #28a745; }
+    .stat-card.progress { border-left-color: #007bff; }
+    .stat-card.progress .num { color: #007bff; }
+    .stat-card.pending { border-left-color: #ffc107; }
+    .stat-card.pending .num { color: #e6ac00; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    th { background: #1a3c5e; color: white; padding: 13px 16px; text-align: left; font-size: 13px; font-weight: 600; }
+    td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; font-size: 13px; color: #333; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8fbff; }
+    .badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
+    .Pending { background: #fff3cd; color: #856404; }
+    .In-Progress { background: #cce5ff; color: #004085; }
+    .Completed { background: #d4edda; color: #155724; }
+    .actions { display: flex; gap: 8px; }
+    .btn-edit { padding: 4px 10px; background: #17a2b8; color: white; border-radius: 4px; text-decoration: none; font-size: 12px; }
+    .btn-edit:hover { background: #138496; }
+    .btn-update { padding: 4px 10px; background: #ffc107; color: #333; border-radius: 4px; text-decoration: none; font-size: 12px; }
+    .btn-update:hover { background: #e0a800; }
+    .btn-delete { padding: 4px 10px; background: #dc3545; color: white; border-radius: 4px; text-decoration: none; font-size: 12px; }
+    .btn-delete:hover { background: #c82333; }
+    .empty { text-align: center; padding: 40px; color: #999; }
+    .footer { text-align: center; color: #aaa; font-size: 12px; margin-top: 30px; padding-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>&#128203; Phetogoprojects Task Manager</h1>
+    <div>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/add">Add Task</a>
+      <a href="/reports">Reports</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="top-bar">
+      <div class="welcome">Dashboard <span>Logged in as: {{ user }}</span></div>
+      <a href="/add" class="btn">+ Add New Task</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="num">{{ tasks|length }}</div>
+        <div class="lbl">Showing Tasks</div>
+      </div>
+      <div class="stat-card completed">
+        <div class="num">{{ tasks|selectattr('4', 'equalto', 'Completed')|list|length }}</div>
+        <div class="lbl">Completed</div>
+      </div>
+      <div class="stat-card progress">
+        <div class="num">{{ tasks|selectattr('4', 'equalto', 'In Progress')|list|length }}</div>
+        <div class="lbl">In Progress</div>
+      </div>
+      <div class="stat-card pending">
+        <div class="num">{{ tasks|selectattr('4', 'equalto', 'Pending')|list|length }}</div>
+        <div class="lbl">Pending</div>
+      </div>
+    </div>
+
+    <form class="filters" method="GET" action="/dashboard">
+      <input type="text" name="search" placeholder="Search client or task..." value="{{ search }}" />
+      <select name="status">
+        <option value="All" {% if status_filter == 'All' %}selected{% endif %}>All Statuses</option>
+        <option value="Pending" {% if status_filter == 'Pending' %}selected{% endif %}>Pending</option>
+        <option value="In Progress" {% if status_filter == 'In Progress' %}selected{% endif %}>In Progress</option>
+        <option value="Completed" {% if status_filter == 'Completed' %}selected{% endif %}>Completed</option>
+      </select>
+      <button type="submit">Search</button>
+      <a href="/dashboard">Clear</a>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Client</th>
+          <th>Description</th>
+          <th>Assigned To</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if tasks %}
+          {% for task in tasks %}
+          <tr>
+            <td>{{ task[0] }}</td>
+            <td><strong>{{ task[1] }}</strong></td>
+            <td>{{ task[2] }}</td>
+            <td>{{ task[3] }}</td>
+            <td><span class="badge {{ task[4].replace(' ', '-') }}">{{ task[4] }}</span></td>
+            <td>{{ task[5] }}</td>
+            <td>
+              <div class="actions">
+                <a href="/edit/{{ task[0] }}" class="btn-edit">Edit</a>
+                <a href="/update/{{ task[0] }}" class="btn-update">Status</a>
+                <a href="/delete/{{ task[0] }}" class="btn-delete" onclick="return confirm('Delete this task?')">Delete</a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr><td colspan="7" class="empty">No tasks found. Click Add New Task to get started.</td></tr>
+        {% endif %}
+      </tbody>
+    </table>
+    <div class="footer">Phetogo Projects Task Management System &copy; 2026</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+
+<html>
+<head>
+  <title>Reports - Phetogo Projects</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f4f8; }
+    nav { background: #1a3c5e; padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; }
+    nav h1 { color: white; font-size: 18px; }
+    nav div a { color: #cce0f0; text-decoration: none; margin-left: 20px; font-size: 14px; }
+    nav div a:hover { color: white; }
+    .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+    h2 { color: #1a3c5e; margin-bottom: 6px; font-size: 20px; }
+    .date { color: #666; font-size: 13px; margin-bottom: 30px; }
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 30px; }
+    .stat { background: white; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .stat .number { font-size: 36px; font-weight: bold; color: #1a3c5e; }
+    .stat .label { font-size: 12px; color: #666; margin-top: 6px; }
+    .total .number { color: #1a3c5e; }
+    .completed .number { color: #155724; }
+    .progress .number { color: #004085; }
+    .pending .number { color: #856404; }
+    .back { display: inline-block; margin-bottom: 20px; color: #1a3c5e; text-decoration: none; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>Phetogo Projects — Task Manager</h1>
+    <div>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/add">Add Task</a>
+      <a href="/reports">Reports</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </nav>
+  <div class="container">
+    <a href="/dashboard" class="back">← Back to Dashboard</a>
+    <h2>Daily Task Report</h2>
+    <p class="date">Date: {{ data.date }}</p>
+    <div class="cards">
+      <div class="stat total">
+        <div class="number">{{ data.total }}</div>
+        <div class="label">Total Tasks</div>
+      </div>
+      <div class="stat completed">
+        <div class="number">{{ data.completed }}</div>
+        <div class="label">Completed</div>
+      </div>
+      <div class="stat progress">
+        <div class="number">{{ data.in_progress }}</div>
+        <div class="label">In Progress</div>
+      </div>
+      <div class="stat pending">
+        <div class="number">{{ data.pending }}</div>
+        <div class="label">Pending</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

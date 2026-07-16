@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Task - Phetogo Projects</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f4f8; }
+    nav { background: #1a3c5e; padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    nav h1 { color: white; font-size: 18px; }
+    nav div a { color: #cce0f0; text-decoration: none; margin-left: 20px; font-size: 14px; padding: 6px 12px; border-radius: 4px; transition: background 0.2s; }
+    nav div a:hover { background: rgba(255,255,255,0.15); color: white; }
+    .container { max-width: 600px; margin: 40px auto; padding: 0 24px; }
+    .back { display: inline-block; margin-bottom: 16px; color: #1a3c5e; text-decoration: none; font-size: 13px; }
+    .back:hover { text-decoration: underline; }
+    .card { background: white; padding: 32px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .card-header { border-bottom: 2px solid #f0f0f0; padding-bottom: 16px; margin-bottom: 24px; }
+    h2 { color: #1a3c5e; font-size: 20px; }
+    h2 span { font-size: 13px; color: #888; font-weight: normal; margin-left: 8px; }
+    label { font-size: 13px; font-weight: bold; color: #444; display: block; margin-bottom: 6px; }
+    input, textarea { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; margin-bottom: 20px; transition: border 0.2s; }
+    input:focus, textarea:focus { border-color: #1a3c5e; outline: none; }
+    textarea { height: 110px; resize: vertical; }
+    .btn-row { display: flex; gap: 10px; }
+    button { padding: 10px 24px; background: #1a3c5e; color: white; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+    button:hover { background: #16324f; }
+    .btn-cancel { padding: 10px 24px; background: #eee; color: #333; border-radius: 6px; font-size: 14px; text-decoration: none; }
+    .btn-cancel:hover { background: #ddd; }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>&#128203; Phetogo Projects — Task Manager</h1>
+    <div>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/add">Add Task</a>
+      <a href="/reports">Reports</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </nav>
+  <div class="container">
+    <a href="/dashboard" class="back">&#8592; Back to Dashboard</a>
+    <div class="card">
+      <div class="card-header">
+        <h2>Log New Client Task <span>Logged in as: {{ user }}</span></h2>
+      </div>
+      <form method="POST">
+        <label>Client Name</label>
+        <input type="text" name="client" placeholder="e.g. ABC Company" required />
+        <label>Task Description</label>
+        <textarea name="description" placeholder="Describe the task or request in detail..." required></textarea>
+        <div class="btn-row">
+          <button type="submit">Add Task</button>
+          <a href="/dashboard" class="btn-cancel">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
