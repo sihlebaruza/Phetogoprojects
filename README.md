@@ -4,12 +4,12 @@ A web application that replaces manual, whiteboard-based task tracking with a sh
 
 **Live demo:** https://phetogoprojects.onrender.com
 
-![Screenshot of the dashboard](screenshot.png)
-<!-- TODO: add a screenshot at docs/screenshot.png, or delete this line -->
+![Screenshot of the dashboard](https://github.com/sihlebaruza/Phetogoprojects/blob/main/Screenshot.png)
+
 
 ## The problem
 
-Phetogo Projects tracked its tasks on a whiteboard. That meant no history, no clear ownership, no visible progress and no way to check status remotely. Tasks were easy to lose or overwrite, and managers had to ask people for updates instead of seeing them.
+Phetogoprojects tracked its tasks on a whiteboard. That meant no history, no clear ownership, no visible progress and no way to check status remotely. Tasks were easy to lose or overwrite, and managers had to ask people for updates instead of seeing them.
 
 ## The solution
 
