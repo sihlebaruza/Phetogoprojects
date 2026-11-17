@@ -4,7 +4,7 @@ A web application that replaces manual, whiteboard-based task tracking with a sh
 
 **Live demo:** https://phetogoprojects.onrender.com
 
-![Screenshot of the dashboard](docs/screenshot.png)
+![Screenshot of the dashboard](screenshot.png)
 <!-- TODO: add a screenshot at docs/screenshot.png, or delete this line -->
 
 ## The problem
